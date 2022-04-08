@@ -35,6 +35,13 @@ class webviewActivity extends StatelessWidget {
                     Fluttertoast.showToast(msg: message, fontSize: 18);
                   }
                 },
+                onPageFinished: (url) async {
+                  if(url.contains('/orders/')){
+                    print('hola');
+                    final message = 'Descarga';
+                    Fluttertoast.showToast(msg: message, fontSize: 18);
+                  }
+                },
                 javascriptMode: JavascriptMode.unrestricted,
                 gestureNavigationEnabled: true,
                 backgroundColor: const Color(0x00000000),
