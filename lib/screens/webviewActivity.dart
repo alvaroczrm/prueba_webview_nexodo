@@ -13,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class webviewActivity extends StatelessWidget {
   late WebViewController controller;
+  late String urldescarga="";
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +39,15 @@ class webviewActivity extends StatelessWidget {
                 onPageFinished: (url) async {
                   if(url.contains('/orders/')){
                     print('hola');
-                    final message = 'Descarga';
+
+                    urldescarga = url;//controller.currentUrl() as String;
+                    final message = urldescarga;
                     Fluttertoast.showToast(msg: message, fontSize: 18);
+                    if(await canLaunch(urldescarga)){
+                      await launch(urldescarga);
+                    }
+                    //_launchURL;
+                    //controller.runJavascript("document.getElementByClass('pcfDescargaWp')");
                   }
                 },
                 javascriptMode: JavascriptMode.unrestricted,
@@ -50,7 +58,9 @@ class webviewActivity extends StatelessWidget {
             )
         );
   }
-
+  void _launchURL() async {
+    if (!await launch(urldescarga)) throw 'Could not launch $urldescarga';
+  }
 }
 /*FUNCIONAL BASE
 class webviewActivity extends StatelessWidget {
