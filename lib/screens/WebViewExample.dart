@@ -49,7 +49,7 @@ class _WebViewExampleState extends State<WebViewExample> {
           if (request.url.contains('.pdf')) {
             print('blocking navigation to $request}');
             
-            return NavigationDecision.prevent;
+            return NavigationDecision.navigate;
           }
           print('allowing navigation to $request');
           return NavigationDecision.navigate;
@@ -93,3 +93,5 @@ class _WebViewExampleState extends State<WebViewExample> {
       children: cookieWidgets.toList(),
     );
   }
+
+

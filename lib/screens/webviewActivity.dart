@@ -12,23 +12,38 @@ import 'package:url_launcher/url_launcher.dart';
 
 
 class webviewActivity extends StatelessWidget {
+  late WebViewController controller;
+
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    /*SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.black, //or set color with: Color(0xFF0000FF)
-    ));
+    ));*/
+
     return MaterialApp(
         home: Scaffold(
-            body: SafeArea(
-              child : const WebView(
+            body: WebView(
+                //initialUrl: 'http://192.168.1.48:8080/#/diegoOficina',
                 initialUrl: 'http://192.168.1.48:8080/#/diegoOficina',
+                onWebViewCreated: (controller){
+                  this.controller = controller;
+                },
+                onPageStarted: (url) async{
+                  if(url.contains('/orders/')){
+                    print('hola');
+                    final message = 'Descarga';
+                    Fluttertoast.showToast(msg: message, fontSize: 18);
+                  }
+                },
                 javascriptMode: JavascriptMode.unrestricted,
+                gestureNavigationEnabled: true,
+                backgroundColor: const Color(0x00000000),
 
               ),
             )
-        )
-    );
+        );
   }
+
 }
 /*FUNCIONAL BASE
 class webviewActivity extends StatelessWidget {

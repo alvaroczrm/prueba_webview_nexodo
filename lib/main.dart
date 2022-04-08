@@ -42,7 +42,8 @@ class exitApp extends StatelessWidget {
         return true;
       }
 
-    }, child: WebViewExample()
+    }, child: webviewActivity()
   );
 }
+
 
